@@ -1,0 +1,2 @@
+#!/bin/bash
+python -c "import code; from hashmap import *; code.interact(local=locals())"
