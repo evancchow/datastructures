@@ -12,7 +12,7 @@ class hashmap():
         """ Initialize a hash map with n buckets. """
         self.numBuckets = n
         self.buckets = [None] * (self.numBuckets + 1)
-        self.bucketNodeCount = [None] * (self.numBuckets + 1)
+        self.totalNodeCount = [None] * (self.numBuckets + 1)
     
     def put(self, val):
         # Insert at end of linked list for relevant bucket (by hash).
@@ -25,11 +25,19 @@ class hashmap():
             while last.next:
                 last = last.next
             last.next = Node(val)
-        self.bucketNodeCount[hashed] += 1
+        self.totalNodeCount[hashed] += 1
 
-        # Rebalance table if necessary, and rehash all keys.
-        # Don't forget to reset the bucketNodeCount.
-        if 
+        # Rebalance table on average > 3 nodes / bucket, and rehash all keys.
+        if (self.totalNodeCount / self.numBuckets) > 3:
+            self.buckets.extend([None] * (self.numBuckets))
+            self.numBuckets *= 2
+            for i in range(len(self.numBuckets / 2)):
+                curr = self.buckets[i]
+                while curr:
+                    # Move node to new bucket. Corner case: same bucket.
+
+
+                    curr = curr.next
         
     def hash(self, string):
         """ Hash a string. We're using a super simplistic
